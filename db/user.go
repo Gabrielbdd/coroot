@@ -181,6 +181,18 @@ func (db *DB) GetUser(id int) (*User, error) {
 	return &u, nil
 }
 
+func (db *DB) GetUserByEmail(email string) (*User, error) {
+	var id int
+	err := db.db.QueryRow("SELECT id FROM users WHERE email = $1", email).Scan(&id)
+	if err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return nil, ErrNotFound
+		}
+		return nil, err
+	}
+	return db.GetUser(id)
+}
+
 func (db *DB) AddUser(email, password, name string, role rbac.RoleName) error {
 	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {

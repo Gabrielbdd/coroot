@@ -199,6 +199,10 @@ func (api *Api) Login(w http.ResponseWriter, r *http.Request) {
 		}
 		userId = admin.Id
 	default:
+		if api.ssoForced() {
+			http.Error(w, "Password login is disabled. Please use SSO to sign in.", http.StatusForbidden)
+			return
+		}
 		id, err := api.db.AuthUser(form.Email, form.Password)
 		if err != nil {
 			klog.Errorln(err)
