@@ -87,7 +87,7 @@ export default {
         },
         ssoLoginUrl() {
             const next = this.$route.query.next || '/';
-            return this.$router.resolve({ path: this.$coroot.base_path + 'api/sso-login', query: { next } }).href;
+            return this.$coroot.base_path + 'api/sso-login?next=' + encodeURIComponent(next);
         },
     },
 
@@ -111,11 +111,6 @@ export default {
 
     methods: {
         checkSSOStatus() {
-            if (this.$coroot.edition !== 'Enterprise') {
-                this.sso_enabled = false;
-                this.sso_forced = false;
-                return;
-            }
             this.$api.ssoStatus((data, error) => {
                 if (error) {
                     this.sso_enabled = false;

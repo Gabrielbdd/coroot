@@ -39,6 +39,7 @@ type Config struct {
 	GlobalClickhouse *Clickhouse `yaml:"global_clickhouse"`
 
 	Auth Auth `yaml:"auth"`
+	SSO  *SSO `yaml:"sso"`
 
 	Projects []Project `yaml:"projects"`
 
@@ -344,6 +345,10 @@ func (cfg *Config) Validate() error {
 		if err = p.Validate(); err != nil {
 			return fmt.Errorf("invalid project #%d: %w", i, err)
 		}
+	}
+
+	if err = cfg.SSO.Validate(); err != nil {
+		return fmt.Errorf("invalid sso: %w", err)
 	}
 
 	for i, sa := range cfg.Auth.ServiceAccounts {

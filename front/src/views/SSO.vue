@@ -3,10 +3,7 @@
         <v-alert v-if="error" color="red" icon="mdi-alert-octagon-outline" outlined text class="mt-2">
             {{ error }}
         </v-alert>
-        <v-alert v-if="disabled" color="info" outlined text>
-            Single Sign-On is available only in Coroot Enterprise (from $1 per CPU core/month).
-            <a href="https://coroot.com/account" target="_blank" class="font-weight-bold">Start</a> your free trial today.
-        </v-alert>
+        <v-alert v-if="sso_provider === 'saml'" color="info" outlined text> This build supports only OIDC. </v-alert>
         <v-alert v-if="readonly" color="primary" outlined text>
             Single Sign-On is configured through the config and cannot be modified via the UI.
         </v-alert>
@@ -26,7 +23,7 @@
                     <td class="font-weight-medium text-no-wrap">Provider</td>
                     <td>
                         <v-radio-group v-model="sso_provider" :disabled="disabled || readonly" row hide-details dense class="mt-0">
-                            <v-radio label="SAML 2.0" value="saml"></v-radio>
+                            <v-radio label="SAML 2.0" value="saml" disabled></v-radio>
                             <v-radio label="OIDC" value="oidc"></v-radio>
                         </v-radio-group>
                     </td>
@@ -177,14 +174,14 @@ export default {
 
     data() {
         return {
-            disabled: this.$coroot.edition !== 'Enterprise',
+            disabled: false,
             readonly: false,
             loading: false,
             error: '',
             status: undefined,
             enabled: false,
             force_sso: false,
-            sso_provider: 'saml',
+            sso_provider: 'oidc',
             default_role: '',
             provider: '',
             roles: [],
@@ -217,7 +214,7 @@ export default {
                 this.readonly = data.readonly;
                 this.enabled = data.enabled;
                 this.force_sso = data.force_sso || false;
-                this.sso_provider = data.sso_provider || 'saml';
+                this.sso_provider = data.sso_provider || 'oidc';
                 this.default_role = data.default_role;
                 this.provider = data.provider;
                 this.roles = data.roles || [];

@@ -9,8 +9,10 @@ require (
 	github.com/PagerDuty/go-pagerduty v1.6.0
 	github.com/atc0005/go-teams-notify/v2 v2.13.0
 	github.com/buger/jsonparser v1.1.2
+	github.com/coreos/go-oidc/v3 v3.20.0
 	github.com/coroot/logparser v1.1.4
 	github.com/dustin/go-humanize v1.0.1
+	github.com/go-jose/go-jose/v4 v4.1.4
 	github.com/gogo/protobuf v1.3.2
 	github.com/golang-jwt/jwt/v5 v5.3.1
 	github.com/golang/snappy v1.0.0
@@ -40,6 +42,7 @@ require (
 	golang.org/x/crypto v0.53.0
 	golang.org/x/exp v0.0.0-20260218203240-3dfff04db8fa
 	golang.org/x/net v0.56.0
+	golang.org/x/oauth2 v0.36.0
 	golang.org/x/term v0.44.0
 	gonum.org/v1/gonum v0.17.0
 	google.golang.org/grpc v1.83.1
@@ -106,7 +109,6 @@ require (
 	go4.org/intern v0.0.0-20211027215823-ae77deb06f29 // indirect
 	go4.org/unsafe/assume-no-moving-gc v0.0.0-20230525183740-e7c30c78aeb2 // indirect
 	golang.org/x/mod v0.37.0 // indirect
-	golang.org/x/oauth2 v0.36.0 // indirect
 	golang.org/x/sync v0.21.0 // indirect
 	golang.org/x/sys v0.46.0 // indirect
 	golang.org/x/text v0.39.0 // indirect

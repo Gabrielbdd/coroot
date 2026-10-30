@@ -134,6 +134,7 @@ func (cfg *Config) ApplyFlags() {
 	if *authBootstrapAdminPassword != "" {
 		cfg.Auth.BootstrapAdminPassword = *authBootstrapAdminPassword
 	}
+	cfg.applySSOFlags()
 	if *developerMode {
 		cfg.DeveloperMode = *developerMode
 	}

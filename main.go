@@ -168,6 +168,9 @@ func main() {
 	r.UseEncodedPath()
 	r.HandleFunc("/api/login", a.Login).Methods(http.MethodPost)
 	r.HandleFunc("/api/logout", a.Logout).Methods(http.MethodPost)
+	r.HandleFunc("/api/sso-status", a.SSOStatus).Methods(http.MethodGet)
+	r.HandleFunc("/api/sso-login", a.SSOLogin).Methods(http.MethodGet)
+	r.HandleFunc("/sso/oidc", a.SSOCallback).Methods(http.MethodGet)
 
 	r.HandleFunc("/api/user", a.Auth(a.User)).Methods(http.MethodGet, http.MethodPost)
 	r.HandleFunc("/api/users", a.Auth(a.Users)).Methods(http.MethodGet, http.MethodPost)
